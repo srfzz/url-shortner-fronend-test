@@ -14,6 +14,7 @@ import Footer from "./pages/landing/layouts/landing/Footer";
 import NavBar from "./pages/landing/layouts/landing/NavBar";
 
 // Dashboard Pages
+import Analytics from "./pages/dashboard/Analytics";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import DashboardLayout from "./pages/dashboard/layouts/DashboardLayout";
 import MyLinks from "./pages/dashboard/MyLinks";
@@ -54,6 +55,7 @@ function App() {
         >
           {/* These render inside DashboardLayout's <Outlet /> */}
           <Route index element={<DashboardHome />} />
+          <Route path="analytics" element={<Analytics />} />
           <Route path="links" element={<MyLinks />} />
           <Route path="settings" element={<Settings />} />
         </Route>

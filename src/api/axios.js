@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/authStorer";
 import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:8080",
@@ -8,15 +9,17 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    // Get the state from the store without using a hook
+    const token = useAuthStore.getState().token;
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      console.warn("API Call: No token found in Zustand store!");
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 api.interceptors.response.use(
   (response) => response,
